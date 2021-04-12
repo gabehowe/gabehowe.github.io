@@ -1,0 +1,81 @@
+body {
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji;
+}
+
+:root {
+    --green: #00FF00;
+    --white: #ffffff;
+    --black: #111111;
+}
+
+* {
+    color: var(--fontColor);
+    font-family: helvetica, serif;
+}
+
+body {
+    background: var(--bg);
+}
+
+.dark-theme {
+    --bg: var(--black);
+    --fontColor: var(--white);
+}
+
+.btn {
+    position: absolute;
+    top: 5pc;
+    left: 1.5%;
+    height: 50pt;
+    width: 50pt;
+    border-width: 2px;
+    border-radius: 10%;
+    color: var(--white);
+    background-color: var(--black);
+}
+.tooltip {
+    position: relative;
+    top: 5pc;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+
+    /* Position the tooltip text */
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: -1%;
+    margin-left: 0;
+
+    /* Fade in tooltip */
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+/* Tooltip arrow */
+.tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 75%;
+}
+
