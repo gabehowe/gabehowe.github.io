@@ -16,17 +16,28 @@ body {
 }
 
 @keyframes girusTextAnimation {
-    from {
-        margin-top: 0%
+    0% {
+        margin-top: 0
     }
-    to {
+    50% {
+        transform: rotate(-11deg);
         margin-top: -10%
     }
+    100% {
+        transform: rotate(11deg);
+        margin-top: -10%;
+    }
+
 }
 
 .girus-text {
     position: absolute;
-    animation: girusTextAnimation 0.5s alternate;
+    display: flex;
+    justify-content: center;
+    margin: auto 25pt 0 25pt;
+    align-items: center;
+    text-align: center;
+    animation: girusTextAnimation 3s alternate;
 }
 
 .btn {

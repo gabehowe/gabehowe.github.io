@@ -2,7 +2,7 @@
 const button = document.body.querySelector('.btn');
 const roasts = ["smh imagine not being able to click this", "you're just bad aren't you",
     "u mum", "no u", "nub", "lol imagine not being able to click this"]
-
+const girusText = document.body.querySelector('.girus-text')
 button.addEventListener('click', function () {
     button.style.visibility = 'hidden'
     document.title = "Second Trial"
@@ -14,16 +14,16 @@ button.addEventListener('click', function () {
     }, 2000);
 });
 button.addEventListener('mouseenter', function (event) {
-    const text = document.body.querySelector('.girus-text')
     button.style.left = getRandomArbitrary(5, 95).toString() + "%"
     button.style.top = getRandomArbitrary(5, 95).toString() + "%"
-    text.innerHTML = roasts[getRandomArbitrary(0, roasts.length)]
-    text.style.left = button.style.left
-    text.style.top = button.style.top
-    text.classList.remove("girus-text")
-    void text.offsetWidth;
-    text.classList.add("girus-text")
+    girusText.innerHTML = roasts[getRandomArbitrary(0, roasts.length)]
+    girusText.style.left = button.style.left
+    girusText.style.top = button.style.top
+    girusText.classList.remove("girus-text")
+    void girusText.offsetWidth;
+    girusText.classList.add("girus-text")
 })
+girusText.addEventListener('webkitAnimationEnd')
 
 function getRandomArbitrary(min, max) {
     return Math.floor(Math.random() * (max - min) + min);
