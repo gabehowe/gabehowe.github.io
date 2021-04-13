@@ -8,13 +8,21 @@ button.addEventListener('click', function () {
     const title = document.body.querySelector('.title')
     title.style.visibility = 'visible'
     title.innerHTML = "Well"
-    setTimeout(() => { title.innerHTML = "You got past the first trial" }, 2000);
+    setTimeout(() => {
+        title.innerHTML = "You got past the first trial"
+    }, 2000);
 });
-// button.addEventListener('mouseenter', function (event) {
-//     button.innerHTML = roasts[getRandomArbitrary(0, roasts.length)]
-//     button.style.left = getRandomArbitrary(5, 95).toString() + "%"
-//     button.style.top = getRandomArbitrary(5, 95).toString() + "%"
-// })
+button.addEventListener('mouseenter', function (event) {
+    const text = document.body.querySelector('.girus-text')
+    button.style.left = getRandomArbitrary(5, 95).toString() + "%"
+    button.style.top = getRandomArbitrary(5, 95).toString() + "%"
+    text.innerHTML = roasts[getRandomArbitrary(0, roasts.length)]
+    text.style.left = button.style.left
+    text.style.top = button.style.top
+    text.classList.remove("girus-text")
+    void text.offsetWidth;
+    text.classList.add("girus-text")
+})
 
 function getRandomArbitrary(min, max) {
     return Math.floor(Math.random() * (max - min) + min);

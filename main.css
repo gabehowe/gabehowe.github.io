@@ -15,13 +15,26 @@ body {
     --black: #111111;
 }
 
+@keyframes girusTextAnimation {
+    from {
+        margin-top: 0%
+    }
+    to {
+        margin-top: -10%
+    }
+}
+
+.girus-text {
+    position: absolute;
+    animation: girusTextAnimation 0.5s alternate;
+}
 
 .btn {
     position: absolute;
     left: 50%;
     top: 50%;
-    height: 7.5%;
-    width: 7.5%;
+    height: 50pt;
+    width: 50pt;
     border-color: #767676;
     border-style: outset;
     border-width: 2pt;
@@ -29,6 +42,7 @@ body {
     color: var(--white);
     background-color: var(--black);
 }
+
 .title {
     display: flex;
     justify-content: center;
