@@ -1,29 +1,59 @@
 'use strict'
 const button = document.body.querySelector('.btn');
-const roasts = ["smh imagine not being able to click this", "you're just bad aren't you",
-    "u mum", "no u", "nub", "lol imagine not being able to click this"]
+const roasts = ["you're just bad aren't you", "my grandmother could've clicked me by now", "could you be any worse?",
+    "honestly, I knew you were bad, but I didn't think you could be this bad!",
+    "try harder, you won't be able to click me", "lol imagine not being able to click me", "I'm getting tired, could you hurry up and click me already?",
+    "what? did you expect me to stay put?"]
 const girusText = document.body.querySelector('.girus-text')
 button.addEventListener('click', function () {
-    button.style.visibility = 'hidden'
     document.title = "Second Trial"
-    const title = document.body.querySelector('.title')
-    title.style.visibility = 'visible'
-    title.innerHTML = "Well"
+    button.style.left = '50%'
+    button.style.top = '50%'
+    buttonSay('THAT\'S NOT FAIR!')
     setTimeout(() => {
-        title.innerHTML = "You got past the first trial"
-    }, 2000);
+        buttonSay('YOU CHEATED SOMEHOW!')
+    }, 1000);
 });
 button.addEventListener('mouseenter', function (event) {
-    button.style.left = getRandomArbitrary(5, 95).toString() + "%"
-    button.style.top = getRandomArbitrary(5, 95).toString() + "%"
-    girusText.innerHTML = roasts[getRandomArbitrary(0, roasts.length)]
+    setTimeout(() => {
+        let newLeft = getRandomArbitrary(5, 95).toString()
+        let newTop = getRandomArbitrary(5, 95).toString()
+        button.style.left = newLeft + "%"
+        button.style.top = newTop + "%"
+        buttonMove(newLeft,newTop)
+        buttonSay(roasts[getRandomArbitrary(0, roasts.length)])
+    }, 50);
+
+})
+girusText.addEventListener('animationend', () => {
+    girusText.querySelector('.nest').innerHTML = ""
+})
+document.addEventListener('load', e => {
+    buttonSay("you shouldn't've come here")
+    setTimeout(() => {buttonSay("well, it's not like you can press me")}, 200)
+
+})
+function buttonMove (left, top) {
+    button.style.setProperty("--new-left", left + '%')
+    button.style.setProperty("--new-top", top + '%')
+    button.classList.remove("animation")
+    void button.offsetWidth;
+    button.classList.add("animation")
+}
+function buttonSay (string) {
+    girusText.querySelector('.nest').innerHTML = string
     girusText.style.left = button.style.left
     girusText.style.top = button.style.top
     girusText.classList.remove("girus-text")
+    girusText.classList.remove("girus-text-inverted")
     void girusText.offsetWidth;
+    let deg = getRandomArbitrary(0,15)
+    if (getRandomArbitrary(0,2) === 1) {
+        deg = deg * -1
+    }
+    girusText.style.setProperty('--random-deg', deg + 'deg' )
     girusText.classList.add("girus-text")
-})
-girusText.addEventListener('webkitAnimationEnd')
+}
 
 function getRandomArbitrary(min, max) {
     return Math.floor(Math.random() * (max - min) + min);
