@@ -2,6 +2,7 @@
 const button = document.body.querySelector('.btn');
 const roasts = ["smh imagine not being able to click this", "you're just bad aren't you",
     "u mum", "no u", "nub", "lol imagine not being able to click this"]
+
 button.addEventListener('click', function () {
     button.style.visibility = 'hidden'
     document.title = "Second Trial"
