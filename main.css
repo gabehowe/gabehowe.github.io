@@ -1,10 +1,12 @@
 body {
     display: flex;
+    height: 100vh;
+    width: 100vw;
     justify-content: center;
     align-items: center;
     font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji;
-    --fontColor: var(--white);
-    --bg: var(--black)
+    color: #ffffff;
+    background: #111111;
 }
 
 :root {
@@ -13,19 +15,6 @@ body {
     --black: #111111;
 }
 
-* {
-    color: var(--fontColor);
-    font-family: helvetica, serif;
-}
-
-body {
-    background: var(--bg);
-}
-
-.dark-theme {
-    --bg: var(--black);
-    --fontColor: var(--white);
-}
 
 .btn {
     position: absolute;
@@ -33,6 +22,8 @@ body {
     top: 50%;
     height: 7.5%;
     width: 7.5%;
+    border-color: #767676;
+    border-style: outset;
     border-width: 2pt;
     border-radius: 10%;
     color: var(--white);
