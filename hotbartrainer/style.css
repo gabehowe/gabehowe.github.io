@@ -1,6 +1,10 @@
 
 body {
     overflow: hidden;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
     margin: 0;
     scroll-margin: 0;
     display: flex;
@@ -15,6 +19,8 @@ body {
 
 :root {
     --primary_color: #111111;
+    --magic_number: 131%;
+    --magic_number_mult: 0;
 }
 
 @keyframes wool-rainbow {
@@ -27,8 +33,11 @@ body {
 
 }
 
-.hotbar {
-    height: 10%;
+.rainbow_wool {
+    position: relative;
+    left: calc(var(--magic_number) * var(--magic_number_mult));
+    height: 69.420%;
+
     content: url("./wool.png");
     color: white;
     filter: hue-rotate(180deg) opacity(100%);
@@ -37,10 +46,16 @@ body {
 
 }
 
-.overlay {
-    background: rgba(39, 62, 84, 0.82);
-    overflow: hidden;
-    height: 100%;
-    z-index: 2;
-}
+.hotbar {
+    justify-content: center;
+    content: url("widgets.png");
+    height: 10%;
+    position: absolute;
 
+}
+.parent {
+    height: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
