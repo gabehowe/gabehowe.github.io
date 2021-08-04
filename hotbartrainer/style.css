@@ -1,0 +1,46 @@
+
+body {
+    overflow: hidden;
+    margin: 0;
+    scroll-margin: 0;
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    justify-content: center;
+    align-items: center;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji;
+    color: #ffffff;
+    background: var(--primary_color);
+}
+
+:root {
+    --primary_color: #111111;
+}
+
+@keyframes wool-rainbow {
+    from {
+        filter: hue-rotate(0deg);
+    }
+    to {
+        filter: hue-rotate(360deg);
+    }
+
+}
+
+.hotbar {
+    height: 10%;
+    content: url("./wool.png");
+    color: white;
+    filter: hue-rotate(180deg) opacity(100%);
+    overflow: hidden;
+    animation: wool-rainbow 3s infinite;
+
+}
+
+.overlay {
+    background: rgba(39, 62, 84, 0.82);
+    overflow: hidden;
+    height: 100%;
+    z-index: 2;
+}
+
