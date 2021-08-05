@@ -34,36 +34,69 @@ body {
 }
 
 .rainbow_wool {
-    position: relative;
-    left: calc(var(--magic_number) * var(--magic_number_mult));
-    height: 69.420%;
-
-    content: url("./wool.png");
-    color: white;
+    content: url("../pictures/wool.png");
     filter: hue-rotate(180deg) opacity(100%);
-    overflow: hidden;
     animation: wool-rainbow 3s infinite;
 
 }
 
 .hotbar {
+    display: flex;
     justify-content: center;
-    content: url("widgets.png");
-    height: 10%;
+    /*background-image: url("widgets.png");*/
+    /*background-size: contain;*/
     position: absolute;
+    height: 10%;
 
 }
+
 .parent {
     height: 10%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
 .keyBindText {
     position: absolute;
     bottom: 10%;
 }
+
 .topText {
     position: absolute;
     top: 10%
+}
+
+.slot {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    position: relative;
+    height: 3.31vw;
+    width: 3vw;
+
+}
+
+.widgetimg {
+    user-select: none;
+    position: absolute;
+    height: 3.31vw;
+}
+
+.card {
+    user-select: none;
+    padding: 0.5vw 0;
+    position: relative;
+    height: 2.25vw;
+}
+.bank {
+    justify-content: left;
+    align-items: center;
+    position: absolute;
+    bottom: 2vh;
+    right: 1.25vh;
+    outline: #222222 4px solid;
+    max-height: 5.5vh;
+    height: 5.5vh;
+    width: 15.5vw;
 }

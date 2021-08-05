@@ -49,3 +49,33 @@ document.addEventListener('keypress', (event) => {
     // document.documentElement.style.setProperty("--magic_number_mult",  event.key - 5)
 
 })
+
+
+const slots = document.querySelectorAll('.slot')
+
+const onDragOver = (event) => {
+    event.preventDefault()
+}
+const onDrop = (event) => {
+    event.preventDefault()
+    const draggedCardId = event.dataTransfer.getData('id')
+    const draggedCard = document.getElementById(draggedCardId)
+    event.target.appendChild(draggedCard)
+}
+
+slots.forEach((slot, index) => {
+    slot.ondragover = onDragOver;
+    slot.ondrop = onDrop;
+})
+
+const cards = document.querySelectorAll('.card')
+
+const onDragStart = (event) => {
+    event.dataTransfer.setData('id', event.target.id)
+}
+const onDragEnd = (event) => {
+}
+cards.forEach((card, index) => {
+    card.ondragstart = onDragStart;
+    card.ondragend = onDragEnd;
+})
