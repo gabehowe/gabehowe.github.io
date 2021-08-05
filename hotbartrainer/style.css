@@ -59,3 +59,11 @@ body {
     justify-content: center;
     align-items: center;
 }
+.keyBindText {
+    position: absolute;
+    bottom: 10%;
+}
+.topText {
+    position: absolute;
+    top: 10%
+}
