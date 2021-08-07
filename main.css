@@ -87,7 +87,7 @@ body {
     animation: button-rage 3s;
 }
 
-.btn {
+.trainer_btn {
 
     position: absolute;
     left: 50%;
@@ -103,7 +103,7 @@ body {
     user-select: none;
     user-focus: none;
 }
-.btn:focus {
+.trainer_btn:focus {
     border-style: hidden;
     user-select: none;
 }

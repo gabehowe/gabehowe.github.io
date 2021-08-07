@@ -14,41 +14,49 @@ let time = 0
 let interval = 0
 let currentItem = null
 const trainerIMG = document.querySelector('.trainer-img')
-const bottomText = document.getElementById('bottomText')
-const topText = document.getElementById('topText')
 const yourTime = document.querySelector('.your-time')
+const slotButtons = document.querySelectorAll('.slot_button')
+let currentBindButton = undefined
+let nextClickReset = false
 updateBinds()
-document.addEventListener('keypress', (event) => {
-    if (event.shiftKey && !nextKey) {
+slotButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+        if (nextClickReset) {
+            nextClickReset = false
+            binds[button.id.substr(4, 1)] = undefined
+            button.innerText = '※'
+        }
+        nextClickReset = true
         nextKey = true
-        toBeBound = event.key
-        return;
-    }
-    if (nextKey) {
-        if (isNaN(event.key)) {
-            topText.style.color = 'rgba(255,0,21,0.68)'
-            topText.innerText = "invalid slot number"
-            setTimeout(() => {
-                topText.innerText = ''
-            }, 1000)
-            return;
-        }
-        if (bottomText.innerText.includes(`: ${toBeBound}`)) {
-            const num = bottomText.innerText.substr(bottomText.innerText.indexOf(` : ${toBeBound}`) - 1, 1)
-            binds[num] = undefined
-            updateBinds()
-        }
-        binds[event.key] = toBeBound
+        toBeBound = button.id.substr(4, 1)
+        currentBindButton = button
+    })
+})
+
+document.addEventListener('keypress', (event) => {
+    if (nextKey && !event.shiftKey) {
+        nextClickReset = false
+
+        slotButtons.forEach((button) => {
+            if (button.innerText.includes(event.key)) {
+                button.innerText = '※'
+                binds[button.id.substr(4, 1)] = undefined
+            }
+        })
+
+        binds[toBeBound] = event.code
+        currentBindButton.innerText = event.key.toUpperCase()
         updateBinds()
-        console.log(`${toBeBound} bound to ${event.key}`)
+        console.log(`Slot ${toBeBound} bound to ${event.key}`)
         nextKey = false
     }
     if (running) {
         if (binds[currentItem.parentElement.id] === undefined) {
             return;
         }
-        if (binds[currentItem.parentElement.id].toLowerCase() !== event.key.toLowerCase()) {
-            return;}
+        if (binds[currentItem.parentElement.id] !== event.code) {
+            return;
+        }
         clearInterval(interval)
         yourTime.innerText = time / 1000
         trainerIMG.style.visibility = 'hidden'
@@ -142,18 +150,18 @@ function trainerStart() {
     yourTime.style.visibility = 'hidden'
     const rand = Math.floor(Math.random() * inHotbar.length)
     currentItem = inHotbar[rand]
+    if (currentItem.classList.contains('rainbow_wool')) {
+        trainerIMG.style.animation = 'wool-rainbow 3s infinite;'
+    } else {
+        trainerIMG.style.animation = ''
+    }
     trainerIMG.src = currentItem.src
     trainerIMG.style.visibility = 'visible'
     interval = setInterval(() => {
         time += 10
     }, 10)
 }
+
 function updateBinds() {
     localStorage.setItem('binds', JSON.stringify(binds))
-    let boundstr = "use shift + &lt;key&gt; and then the number of the slot to bind a key <br> Current binds: <br>"
-    for (const [key, value] of Object.entries(binds)) {
-        if (value === undefined) continue
-        boundstr += `${key} : ${value} <br>`
-    }
-    bottomText.innerHTML = boundstr
 }

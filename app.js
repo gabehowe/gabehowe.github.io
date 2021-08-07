@@ -1,6 +1,6 @@
 'use strict'
 let trial = 1
-const button = document.body.querySelector('.btn');
+const button = document.body.querySelector('.trainer_btn');
 const trick2 = document.body.querySelector('.trick2')
 const roasts = ["you're just bad aren't you", "my grandmother could've clicked me by now", "could you be any worse?",
     "honestly, I knew you were bad, but I didn't think you could be this bad!",
@@ -44,7 +44,7 @@ button.addEventListener('click', function () {
     }
 });
 
-button.addEventListener('mouseenter', async function (event) {
+button.addEventListener('mouseenter', async function () {
 
     setTimeout(async () => {
         if (trial === 1) {
@@ -65,7 +65,7 @@ button.addEventListener('mouseenter', async function (event) {
 girusText.addEventListener('animationend', () => {
     girusText.querySelector('.nest').innerHTML = ""
 })
-document.addEventListener('load', e => {
+document.addEventListener('load', () => {
     buttonSay("you shouldn't've come here")
     setTimeout(() => {
         buttonSay("well, it's not like you can press me")
