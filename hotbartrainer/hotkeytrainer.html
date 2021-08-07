@@ -7,18 +7,21 @@
 </head>
 
 <body>
+<img class="trainer-img" alt="" draggable="false" src=""/>
+<p class="your-time">You took</p>
 <div class="parent">
-    <div class="slot bank" id="bank"><img class="card" id="sword" draggable="true" src="../pictures/sword.png">
-        <img class="card" id="axe" draggable="true" src="../pictures/axe.png">
-        <img class="card" id="pickaxe" draggable="true" src="../pictures/pickaxe.png">
-        <img class="card" id="bow" draggable="true" src="../pictures/bow.png">
-        <img class="card" id="tnt" draggable="true" src="../pictures/tnt.png">
-        <img class="card" id="fireball" draggable="true" src="../pictures/fireball.png">
+
+    <div class="slot bank" id="bank"><img class="card" id="sword" draggable="true" src="../pictures/sword.png" alt="sword">
+        <img class="card" id="axe" draggable="true" src="../pictures/axe.png" alt="axe">
+        <img class="card" id="pickaxe" draggable="true" src="../pictures/pickaxe.png" alt="pickaxe">
+        <img class="card" id="bow" draggable="true" src="../pictures/bow.png" alt="bow">
+        <img class="card" id="tnt" draggable="true" src="../pictures/tnt.png" alt="tnt">
+        <img class="card" id="fireball" draggable="true" src="../pictures/fireball.png" alt="fireball">
+        <img class="rainbow_wool card" id="wool" draggable="true" src="../pictures/wool.png" alt="rainbow_wool">
     </div>
     <div class="hotbar" draggable="false">
-        <img src="../pictures/widgets.png" class="widgetimg">
+        <img src="../pictures/widgets.png" class="widgetimg" alt="">
         <div class="slot" id="1">
-            <div class="rainbow_wool card" id="wool" draggable="true"></div>
         </div>
         <div class="slot" id="2"></div>
         <div class="slot" id="3"></div>
@@ -35,6 +38,7 @@
 <p class="topText" id="topText"></p>
 <p class="keyBindText" id="bottomText">Use shift + &lt;key&gt; and then the number of the slot to bind a key <br>
     Current binds:</p>
+<button class="btn" id="start">Start Trainer</button>
 </body>
 <script src="hotkeytrainer.js"></script>
 <noscript>You need to enable JS to view the full site.</noscript>

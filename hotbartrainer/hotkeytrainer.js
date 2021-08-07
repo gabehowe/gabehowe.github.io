@@ -5,12 +5,19 @@
  * and which items are in which slots
  * the you have the app randomly show you an item and the time it takes for you to switch to it
  * sort of like a touch typing trainer specifically for minecraft hotbars***/
-const wool = document.body.querySelector(".rainbow_wool")
+
 const binds = {}
+let inHotbar = []
 let nextKey = false;
 let toBeBound = '';
+let running = false
+const trainerIMG = document.querySelector('.trainer-img')
 const bottomText = document.getElementById('bottomText')
 const topText = document.getElementById('topText')
+let time = 0
+let interval = 0
+let currentItem = null
+const yourTime = document.querySelector('.your-time')
 document.addEventListener('keypress', (event) => {
     if (event.shiftKey && !nextKey) {
         nextKey = true
@@ -40,13 +47,25 @@ document.addEventListener('keypress', (event) => {
         console.log(`${toBeBound} bound to ${event.key}`)
         nextKey = false
     }
-    if (isNaN(event.key)) {
-        return
+    if (running) {
+        if (binds[currentItem.parentElement.id] === undefined) {
+            return;
+        }
+        if (binds[currentItem.parentElement.id].toLowerCase() !== event.key.toLowerCase()) {
+            return;
+        }
+        clearInterval(interval)
+        yourTime.innerText = time / 1000
+        trainerIMG.style.visibility = 'hidden'
+        yourTime.style.visibility = 'visible'
+        time = 0
+        setTimeout(() => trainerStart(), 500)
+
+
+
+
     }
-    if (event.key === '0') {
-        return;
-    }
-    // document.documentElement.style.setProperty("--magic_number_mult",  event.key - 5)
+
 
 })
 
@@ -58,12 +77,24 @@ const onDragOver = (event) => {
 }
 const onDrop = (event) => {
     event.preventDefault()
+    if (event.dataTransfer == null) {
+        return;
+    }
     const draggedCardId = event.dataTransfer.getData('id')
     const draggedCard = document.getElementById(draggedCardId)
+    if (event.target.classList.contains('card')) {
+        return
+    }
+    if (!event.target.classList.contains('bank')) {
+        inHotbar.push(draggedCard)
+    } else {
+        inHotbar = arrayRemove(inHotbar, draggedCard)
+    }
     event.target.appendChild(draggedCard)
 }
 
-slots.forEach((slot, index) => {
+
+slots.forEach((slot) => {
     slot.ondragover = onDragOver;
     slot.ondrop = onDrop;
 })
@@ -72,10 +103,54 @@ const cards = document.querySelectorAll('.card')
 
 const onDragStart = (event) => {
     event.dataTransfer.setData('id', event.target.id)
+
 }
-const onDragEnd = (event) => {
+const onDragEnd = () => {
 }
-cards.forEach((card, index) => {
+const onDropCard = (event) => {
+    event.preventDefault()
+}
+cards.forEach((card) => {
     card.ondragstart = onDragStart;
     card.ondragend = onDragEnd;
+    card.ondrop = onDropCard;
 })
+
+const startButton = document.getElementById('start')
+
+
+startButton.addEventListener('click', () => {
+    if (!running) {
+        if (inHotbar.length < 1) {
+            return;
+        }
+        running = true
+        startButton.innerText = "Stop Trainer"
+        trainerStart()
+
+    } else {
+        trainerIMG.src = ""
+        trainerIMG.style.visibility = 'hidden'
+        running = false
+        startButton.innerText = "Start Trainer"
+        yourTime.style.visibility = 'hidden'
+
+    }
+})
+
+function arrayRemove(arr, value) {
+
+    return arr.filter(function (ele) {
+        return ele !== value;
+    });
+}
+function trainerStart() {
+    yourTime.style.visibility = 'hidden'
+    const rand = Math.floor(Math.random() * inHotbar.length)
+    currentItem = inHotbar[rand]
+    trainerIMG.src = currentItem.src
+    trainerIMG.style.visibility = 'visible'
+    interval = setInterval(() => {
+        time += 10
+    }, 10)
+}
