@@ -5,19 +5,19 @@
  * and which items are in which slots
  * the you have the app randomly show you an item and the time it takes for you to switch to it
  * sort of like a touch typing trainer specifically for minecraft hotbars***/
-
-const binds = {}
+const binds = JSON.parse(localStorage.getItem('binds')) ?? {};
 let inHotbar = []
 let nextKey = false;
 let toBeBound = '';
 let running = false
-const trainerIMG = document.querySelector('.trainer-img')
-const bottomText = document.getElementById('bottomText')
-const topText = document.getElementById('topText')
 let time = 0
 let interval = 0
 let currentItem = null
+const trainerIMG = document.querySelector('.trainer-img')
+const bottomText = document.getElementById('bottomText')
+const topText = document.getElementById('topText')
 const yourTime = document.querySelector('.your-time')
+updateBinds()
 document.addEventListener('keypress', (event) => {
     if (event.shiftKey && !nextKey) {
         nextKey = true
@@ -36,14 +36,10 @@ document.addEventListener('keypress', (event) => {
         if (bottomText.innerText.includes(`: ${toBeBound}`)) {
             const num = bottomText.innerText.substr(bottomText.innerText.indexOf(` : ${toBeBound}`) - 1, 1)
             binds[num] = undefined
+            updateBinds()
         }
         binds[event.key] = toBeBound
-        let boundstr = "use shift + &lt;key&gt; and then the number of the slot to bind a key <br> Current binds: <br>"
-        for (const [key, value] of Object.entries(binds)) {
-            if (value === undefined) continue
-            boundstr += `${key} : ${value} <br>`
-        }
-        bottomText.innerHTML = boundstr
+        updateBinds()
         console.log(`${toBeBound} bound to ${event.key}`)
         nextKey = false
     }
@@ -52,16 +48,13 @@ document.addEventListener('keypress', (event) => {
             return;
         }
         if (binds[currentItem.parentElement.id].toLowerCase() !== event.key.toLowerCase()) {
-            return;
-        }
+            return;}
         clearInterval(interval)
         yourTime.innerText = time / 1000
         trainerIMG.style.visibility = 'hidden'
         yourTime.style.visibility = 'visible'
         time = 0
         setTimeout(() => trainerStart(), 500)
-
-
 
 
     }
@@ -144,6 +137,7 @@ function arrayRemove(arr, value) {
         return ele !== value;
     });
 }
+
 function trainerStart() {
     yourTime.style.visibility = 'hidden'
     const rand = Math.floor(Math.random() * inHotbar.length)
@@ -153,4 +147,13 @@ function trainerStart() {
     interval = setInterval(() => {
         time += 10
     }, 10)
+}
+function updateBinds() {
+    localStorage.setItem('binds', JSON.stringify(binds))
+    let boundstr = "use shift + &lt;key&gt; and then the number of the slot to bind a key <br> Current binds: <br>"
+    for (const [key, value] of Object.entries(binds)) {
+        if (value === undefined) continue
+        boundstr += `${key} : ${value} <br>`
+    }
+    bottomText.innerHTML = boundstr
 }
