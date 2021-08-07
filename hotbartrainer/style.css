@@ -173,3 +173,10 @@ body {
     height: 2vw;
     width: 2vw;
 }
+.hide_hotbar {
+    position: absolute;
+    height: 50px;
+    width: 150px;
+    bottom: 7.25vh;
+    left: 0.69420vw;
+}

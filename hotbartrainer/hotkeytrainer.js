@@ -165,3 +165,17 @@ function trainerStart() {
 function updateBinds() {
     localStorage.setItem('binds', JSON.stringify(binds))
 }
+const hide_hotbar = document.querySelector('.hide_hotbar')
+let hotbarHidden = false
+hide_hotbar.addEventListener('click', () => {
+    const parent = document.querySelector('.parent')
+    if (!hotbarHidden) {
+        parent.style.visibility = 'hidden'
+        hotbarHidden = true
+        hide_hotbar.innerText = 'Show Hotbar'
+    } else {
+        parent.style.visibility = 'visible'
+        hotbarHidden = false
+        hide_hotbar.innerText = 'Hide Hotbar'
+    }
+})
