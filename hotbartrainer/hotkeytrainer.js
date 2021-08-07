@@ -18,12 +18,14 @@ const yourTime = document.querySelector('.your-time')
 const slotButtons = document.querySelectorAll('.slot_button')
 let currentBindButton = undefined
 let nextClickReset = false
+const buttonNames = JSON.parse(localStorage.getItem('buttonNames')) ?? {}
 updateBinds()
 slotButtons.forEach((button) => {
     button.addEventListener('click', () => {
         if (nextClickReset) {
             nextClickReset = false
             binds[button.id.substr(4, 1)] = undefined
+            buttonNames[button.id.substr(4, 1)] = undefined
             button.innerText = '※'
         }
         nextClickReset = true
@@ -36,15 +38,16 @@ slotButtons.forEach((button) => {
 document.addEventListener('keypress', (event) => {
     if (nextKey && !event.shiftKey) {
         nextClickReset = false
-
         slotButtons.forEach((button) => {
-            if (button.innerText.includes(event.key)) {
+            if (button.innerText.includes(event.key.toUpperCase())) {
                 button.innerText = '※'
                 binds[button.id.substr(4, 1)] = undefined
+                buttonNames[button.id.substr(4, 1)] = undefined
             }
         })
 
         binds[toBeBound] = event.code
+        buttonNames[toBeBound] = event.key
         currentBindButton.innerText = event.key.toUpperCase()
         updateBinds()
         console.log(`Slot ${toBeBound} bound to ${event.key}`)
@@ -164,7 +167,14 @@ function trainerStart() {
 
 function updateBinds() {
     localStorage.setItem('binds', JSON.stringify(binds))
+    localStorage.setItem('buttonNames', JSON.stringify(buttonNames))
+    slotButtons.forEach((button) => {
+        if (buttonNames[button.id.substr(4, 1)]) {
+            button.innerText = buttonNames[button.id.substr(4, 1)].toUpperCase()
+        }
+    })
 }
+
 const hide_hotbar = document.querySelector('.hide_hotbar')
 let hotbarHidden = false
 hide_hotbar.addEventListener('click', () => {
