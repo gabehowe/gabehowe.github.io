@@ -6,7 +6,10 @@
  * the you have the app randomly show you an item and the time it takes for you to switch to it
  * sort of like a touch typing trainer specifically for minecraft hotbars***/
 const binds = JSON.parse(localStorage.getItem('binds')) ?? {};
+const hotbarContents = JSON.parse(localStorage.getItem('hotbarContents')) ?? {}
+const hotbar = document.querySelector('.hotbar')
 let inHotbar = []
+const inHotbarObj = {}
 let nextKey = false;
 let toBeBound = '';
 let running = false
@@ -19,6 +22,17 @@ const slotButtons = document.querySelectorAll('.slot_button')
 let currentBindButton = undefined
 let nextClickReset = false
 const buttonNames = JSON.parse(localStorage.getItem('buttonNames')) ?? {}
+if (hotbarContents) {
+    for (const [key, value] of Object.entries(hotbarContents)) {
+        document.getElementById(key).appendChild(document.getElementById(value))
+    }
+    for (let child of hotbar.children) {
+        if (child.firstElementChild) {
+            inHotbar.push(child.firstElementChild)
+        }
+    }
+
+}
 updateBinds()
 slotButtons.forEach((button) => {
     button.addEventListener('click', () => {
@@ -91,9 +105,16 @@ const onDrop = (event) => {
     }
     if (!event.target.classList.contains('bank')) {
         inHotbar.push(draggedCard)
+        inHotbarObj[event.target.id] = draggedCardId
     } else {
+        for (const [key, value] of inHotbarObj) {
+            if (value === draggedCard) {
+                inHotbarObj[key] = undefined
+            }
+        }
         inHotbar = arrayRemove(inHotbar, draggedCard)
     }
+    localStorage.setItem('hotbarContents', JSON.stringify(inHotbarObj))
     event.target.appendChild(draggedCard)
 }
 
