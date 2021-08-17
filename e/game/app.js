@@ -1,6 +1,6 @@
 'use strict'
 let trial = 1
-const button = document.body.querySelector('.trainer_btn');
+const button = document.body.querySelector('.btn');
 const trick2 = document.body.querySelector('.trick2')
 const roasts = ["you're just bad aren't you", "my grandmother could've clicked me by now", "could you be any worse?",
     "honestly, I knew you were bad, but I didn't think you could be this bad!",
