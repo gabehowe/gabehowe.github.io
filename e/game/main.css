@@ -3,8 +3,11 @@ body {
     margin: 0;
     scroll-margin: 0;
     display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
     height: 100vh;
     width: 100vw;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji;
@@ -14,8 +17,9 @@ body {
 
 :root {
     --trial: 1;
-    --new-left: 0;
-    --new-top: 0;
+    --move-anim-len: 4;
+    --new-left: 0%;
+    --new-top: 0%;
     --random-deg: 11;
     --random-deg-div-2: 5.5;
     --green: #00FF00;
@@ -45,9 +49,6 @@ body {
 }
 
 @keyframes button-move {
-    from {
-        transform: translate(0, 0);
-    }
     to {
         top: var(--new-top);
         left: var(--new-left);
@@ -56,14 +57,40 @@ body {
 
 @keyframes button-rage {
     from {
-        transform: rotate(0) translate(0,0);
+        transform: rotate(0) translate(0, 0);
     }
     95% {
-        transform: rotate(3600deg) translate(500%,500%);
+        transform: rotate(3600deg) translate(500%, 500%);
     }
     to {
-        transform: translate(0,0);
+        transform: translate(0, 0);
     }
+}
+
+@keyframes button-fade {
+    from {
+        opacity: 100%;
+    }
+    to {
+        opacity: 0;
+    }
+
+}
+
+@keyframes button-collapse {
+    50% {
+        font-size: 0;
+    }
+    90% {
+        font-size: 0;
+        height: 0;
+        border-width: 2px;
+    }
+    100% {
+        border-width: 0;
+        visibility: hidden;
+    }
+
 }
 
 .nest {
@@ -79,8 +106,8 @@ body {
     animation: girusTextAnimation 1s alternate;
 }
 
-.move-animation {
-    animation: button-move 0.1s alternate;
+.animation {
+    animation: button-move var(--move-anim-len) s running;
 }
 
 .rage-spin {
@@ -92,21 +119,18 @@ body {
     position: absolute;
     left: 50%;
     top: 50%;
-    height: 50pt;
-    width: 50pt;
+    height: 75px;
+    width: 75px;
     border-color: #767676;
     border-style: outset;
-    border-width: 2pt;
+    border-width: 2px;
     border-radius: 10%;
     color: var(--white);
     background-color: var(--black);
     user-select: none;
     user-focus: none;
 }
-.btn:focus {
-    border-style: hidden;
-    user-select: none;
-}
+
 .trick2 {
     user-select: none;
     visibility: hidden;
@@ -121,4 +145,33 @@ body {
     /*left: 50%;*/
     /*top: 50%;*/
     visibility: hidden;
+}
+
+.button_div {
+    position: absolute;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-content: space-evenly;
+    visibility: hidden;
+    width: 425px;
+    height: 425px;
+}
+
+@keyframes duplication {
+    from {
+        opacity: 100%;
+    }
+    to {
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        transform: translate(0, 0)
+    }
+
+}
+
+.duplication {
+    animation: duplication 1.5s;
 }
