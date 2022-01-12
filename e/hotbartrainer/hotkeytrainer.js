@@ -210,3 +210,9 @@ hide_hotbar.addEventListener('click', () => {
         hide_hotbar.innerText = 'Hide Hotbar'
     }
 })
+const linkButtons = document.querySelectorAll('.link_btn')
+linkButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+        window.location.href = button.getAttribute('link')
+    })
+})

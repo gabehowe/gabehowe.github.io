@@ -190,3 +190,9 @@ button.addEventListener('mouseenter', async function () {
 girusText.addEventListener('animationend', () => {
     girusText.querySelector('.nest').innerHTML = ""
 })
+const linkButtons = document.querySelectorAll('.link_btn')
+linkButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+        window.location.href = button.getAttribute('link')
+    })
+})

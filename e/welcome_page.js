@@ -1,8 +1,8 @@
 'use strict'
-const linkButtons = document.querySelectorAll('.link_btn')
 let christmasMode = false;
 let infoSuffix = ' Have fun, and goodbye!'
 const date = new Date()
+const linkButtons = document.querySelectorAll('.link_btn')
 linkButtons.forEach((button) => {
     button.addEventListener('click', () => {
         window.location.href = button.getAttribute('link')

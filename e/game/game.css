@@ -175,3 +175,28 @@ body {
 .duplication {
     animation: duplication 1.5s;
 }
+.link_btn {
+    position: relative;
+    min-height: 50px;
+    min-width: 150px;
+    margin: 3px;
+    background: var(--primary_color);
+    border-color: #30363D;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 10px;
+    font-size: 11pt;
+    color: var(--white);
+    user-select: none;
+    user-focus: none;
+}
+
+.link_btn:hover {
+    border-color: #6E7681;
+    background-color: #1a1a1a;
+}
+
+.link_btn:active {
+    border-color: #6E7681;
+    background-color: var(--primary_color);
+}

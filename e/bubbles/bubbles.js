@@ -1,3 +1,10 @@
+// handle back button
+const linkButtons = document.querySelectorAll('.link_btn')
+linkButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+        window.location.href = button.getAttribute('link')
+    })
+})
 function blend_colors(color1, color2, percentage) {
     // https://coderwall.com/p/z8uxzw/javascript-color-blender
     // check input
