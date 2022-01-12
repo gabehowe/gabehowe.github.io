@@ -16,7 +16,7 @@ if (date.getMonth() === 11) {
 
 if (christmasMode) {
     for (const snowflake of document.querySelectorAll('.snowflakes')[0].children) {
-        snowflake.style.visibility = 'visible'
+        snowflake.visibility = 'visible'
     }
     infoSuffix = ' Merry Christmas!'
     const image = new Image()
@@ -26,6 +26,7 @@ if (christmasMode) {
     image.style.top = '-3%'
     image.style.minWidth = '104%'
     image.style.maxHeight = '60%'
+    image.draggable = false;
     console.log(image.width)
     console.log("christmas!")
 }
