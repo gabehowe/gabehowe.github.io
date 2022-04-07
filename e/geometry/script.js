@@ -4,7 +4,7 @@ const length = 500
 const strokeStyle = "#FF0000"
 const webStyle = "#0000FF"
 
-function drawPolygon(points, area) {
+function drawPolygon(points, perimeter, area) {
     cc.beginPath()
     cc.strokeStyle = strokeStyle
     cc.fillStyle = "#FFFFFF"
@@ -17,6 +17,13 @@ function drawPolygon(points, area) {
     cc.font = '25px cambria'
     cc.textAlign = 'left'
     cc.fillText('A = ' + area, 0, 20)
+    if (points.length === 3) {
+        cc.fillText('A = √3/4 * side²', 0, 50)
+    } else if (points.length === 4) {
+        cc.fillText('A = side²', 0, 50)
+    } else {
+        cc.fillText('A = 1/2 * perimeter * apothem', 0, 50)
+    }
 }
 
 function generatePoints(sides) {
@@ -33,25 +40,17 @@ function generatePoints(sides) {
         points.push([(canvas.width / 2) - offset + sideLength * Math.cos(i * 2 * Math.PI / sides), (canvas.height / 2) + sideLength * Math.sin(i * 2 * Math.PI / sides)])
         direction += angle
     }
-    let area = -1
+    let area
     const perimeter = sideLength * sides
     cc.fillStyle = '#FFFFFF'
     cc.font = '25px cambria'
-    if (sides === 3) {
+    if (points.length === 3) {
         area = (Math.sqrt(3) / 4) * sideLength ** 2
-        cc.fillText('A = √3/4 * side²', 0, 50)
-    } else if (sides === 4) {
+    } else if (points.length === 4) {
         area = sideLength ** 2
-        cc.fillText('A = side²', 0, 50)
     } else {
-        cc.fillText('A = 1/2 * perimeter * apothem', 0, 50)
         const x = ((points[0][0] + points[1][0]) / 2)
         const y = ((points[0][1] + points[1][1]) / 2)
-        cc.beginPath()
-        cc.strokeStyle = '#00FF00'
-        cc.arc(x, y, 5, 0, Math.PI * 2)
-        cc.closePath()
-        cc.stroke()
         const apothem = Math.hypot((x - 500), (y - 500))
         area = 0.5 * perimeter * apothem
     }
@@ -136,7 +135,7 @@ function animate() {
         if (web) {
             drawWeb(points)
         }
-        drawPolygon(points, area)
+        drawPolygon(points, perimeter, area)
     }
     cc.beginPath()
     cc.strokeStyle = "#00FF00"
