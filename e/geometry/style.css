@@ -1,0 +1,116 @@
+body {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-color: #111111;
+    color: #ffffff;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji;
+}
+
+canvas {
+    position: absolute;
+    width: 75%;
+    height: 75%;
+    left: 5%;
+    top: 10%;
+    max-width: 800px;
+    max-height: 800px;
+    outline: #010101 5px inset;
+}
+
+#sideCountContainer {
+    order: 1;
+    position: absolute;
+    display: flex;
+    width: 20%;
+    left: 1%;
+    justify-content: center;
+    top: 1%;
+    height: 10%;
+}
+
+#sidesSliderContainer {
+    order: 0;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+.slider {
+    -webkit-appearance: none;
+    margin: 0;
+    appearance: none;
+    height: 1%;
+    width: 100%;
+    border-radius: 5px;
+    left: 1%;
+    min-height: 10px;
+    outline: none;
+    top: 2%;
+    color: #ffffff;
+    background-color: #222222;
+    border-color: #222222;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #424242;
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #424242;
+    cursor: pointer;
+}
+
+#sideCount {
+    position: relative;
+    text-align: center;
+    top: -20%;
+}
+
+#optionsContainer {
+    top: 1%;
+    position: relative;
+    left: 10%;
+    height: 10%;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    flex-flow: row nowrap;
+}
+#checkBoxContainer {
+    position: relative;
+    order: 2;
+    left: 22%;
+    top: -50%;
+}
+.frac {
+    display: inline-block;
+    position: relative;
+    vertical-align: middle;
+    letter-spacing: 0.001em;
+    text-align: center;
+    font-family: "Cambria Math", serif;
+    font-size: 25px;
+}
+.frac > span {
+    display: block;
+    padding: 0.1em;
+}
+.frac span.bottom {
+    border-top: thin solid black;
+}
+.frac span.symbol {
+    display: none;
+}
