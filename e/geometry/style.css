@@ -94,6 +94,7 @@ canvas {
     flex-flow: column wrap;
     gap: 10%;
     display: flex;
+    max-height: 70px;
     order: 2;
     left: 22%;
     top: -6%;

@@ -1,24 +1,33 @@
 const canvas = document.querySelector('canvas')
 const cc = canvas.getContext('2d')
-const length = 500
+let length = 470
 const strokeStyle = "#FF0000"
 const webColor = "#0000FF"
+const linkButtons = document.querySelectorAll('.link_btn')
+let spiral = false
+linkButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+        window.location.href = button.getAttribute('link')
+    })
+})
 
-function drawPolygon(points, perimeter, area, noLines) {
+function drawPolygon(points, perimeter, area, noLines, spiralCheckbox) {
     cc.beginPath()
     cc.strokeStyle = strokeStyle
     cc.fillStyle = "#FFFFFF"
     cc.lineWidth = 5
-    for (const point of points) {
-        if (noLines) {
-            cc.beginPath()
-            cc.arc(point[0], point[1], 1, 0, Math.PI * 2)
-            cc.closePath()
-            cc.stroke()
-        } else {
-            cc.lineTo(point[0], point[1])
-        }
+    if (!spiralCheckbox) {
+        for (const point of points) {
+            if (noLines) {
+                cc.beginPath()
+                cc.arc(point[0], point[1], 1, 0, Math.PI * 2)
+                cc.closePath()
+                cc.stroke()
+            } else {
+                cc.lineTo(point[0], point[1])
+            }
 
+        }
     }
     cc.closePath()
     cc.stroke()
@@ -90,6 +99,28 @@ function drawCircle(filled) {
     cc.stroke()
 }
 
+let spiralPoints = []
+
+function drawSpiral(points, speed) {
+    for (let i = 0; i < spiralPoints.length - 1; i++) {
+        cc.beginPath()
+        cc.strokeStyle = '#00FF00'
+        cc.lineWidth = 2
+        cc.moveTo(spiralPoints[i][0], spiralPoints[i][1])
+        cc.lineTo(spiralPoints[i + 1][0], spiralPoints[i + 1][1])
+        cc.stroke()
+        cc.closePath()
+    }
+    if (spiral) {
+        if (length < 0) {
+            spiral = false
+            return
+        }
+        spiralPoints = spiralPoints.concat(points)
+        length -= speed / 5
+    }
+
+}
 
 function drawCenterLines(points) {
     cc.beginPath()
@@ -136,11 +167,14 @@ function drawWeb(points) {
         cc.moveTo(lines[i]['start'][0], lines[i]['start'][1])
         cc.lineTo(lines[i]['end'][0], lines[i]['end'][1])
     }
-    cc.stroke()
     cc.closePath()
+    cc.stroke()
 }
 
 let spinRotation = 0
+let lastSpiral = false
+let lastSideCount = 0
+let lastRotation = 0
 
 function animate() {
     requestAnimationFrame(animate)
@@ -153,6 +187,27 @@ function animate() {
     const spin = document.getElementById('spinCheckbox').checked
     const noLines = document.getElementById('pointsCheckbox').checked
     const centerLines = document.getElementById('centerLineCheckbox').checked
+    const spiralCheckbox = document.getElementById('spiralCheckbox').checked
+    if (lastSpiral !== spiralCheckbox) {
+        spinRotation = 0
+        lastSpiral = spiralCheckbox
+        if (spiralCheckbox) {
+            spiral = spiralCheckbox
+        }
+    }
+    if (spiralCheckbox && (lastSideCount !== parseInt(sides.value) || rotationValue !== lastRotation)) {
+        lastSideCount = parseInt(sides.value)
+        lastRotation = rotationValue
+        spinRotation = 0
+
+        length = 470
+        spiralPoints = []
+        spiral = spiralCheckbox
+    }
+    if (!spiralCheckbox) {
+        length = 470
+        spiralPoints = []
+    }
     const rotationCounter = document.getElementById('rotationCount')
     let rotation
     if (spin) {
@@ -182,7 +237,8 @@ function animate() {
         if (centerLines) {
             drawCenterLines(points)
         }
-        drawPolygon(points, perimeter, area, noLines)
+        drawPolygon(points, perimeter, area, noLines, spiralCheckbox)
+        drawSpiral(points, rotation)
     }
     cc.beginPath()
     cc.strokeStyle = "#00FF00"
@@ -191,11 +247,5 @@ function animate() {
     cc.closePath()
 }
 
-const linkButtons = document.querySelectorAll('.link_btn')
-linkButtons.forEach((button) => {
-    button.addEventListener('click', () => {
-        window.location.href = button.getAttribute('link')
-    })
-})
 
 animate()
