@@ -26,19 +26,26 @@ function drawPolygon(points, perimeter, area) {
     }
 }
 
-function generatePoints(sides) {
+function rotate(cx, cy, x, y, angle) {
+    let radians = (Math.PI / 180) * angle,
+        cos = Math.cos(radians),
+        sin = Math.sin(radians),
+        nx = (cos * (x - cx)) + (sin * (y - cy)) + cx,
+        ny = (cos * (y - cy)) - (sin * (x - cx)) + cy;
+    return [nx, ny];
+}
+
+function generatePoints(sides, rotation) {
     if (sides < 3) {
         return
     }
-    const angle = ((sides - 2) * 180) / sides
-    let direction = angle
     const sideLength = length - (sides)
-    const offset = /*sides === 3 ? 100 : */0
     let points = []
     for (let i = 0; i < sides; i++) {
-        cc.lineTo((canvas.width / 2) - offset + sideLength * Math.cos(i * 2 * Math.PI / sides), (canvas.height / 2) + sideLength * Math.sin(i * 2 * Math.PI / sides));
-        points.push([(canvas.width / 2) - offset + sideLength * Math.cos(i * 2 * Math.PI / sides), (canvas.height / 2) + sideLength * Math.sin(i * 2 * Math.PI / sides)])
-        direction += angle
+        points.push([(canvas.width / 2) + sideLength * Math.cos(i * 2 * Math.PI / sides), (canvas.height / 2) + sideLength * Math.sin(i * 2 * Math.PI / sides)])
+    }
+    for (let i = 0; i < points.length; i++) {
+        points[i] = rotate(500, 500, points[i][0], points[i][1], rotation)
     }
     let area
     const perimeter = sideLength * sides
@@ -111,24 +118,28 @@ function drawWeb(points) {
     cc.stroke()
 }
 
+
 function animate() {
     requestAnimationFrame(animate)
     canvas.width = 1000
     canvas.height = 1000
-    const input = document.getElementById('polygonSidesSlider')
-    const sideCounter = document.getElementById('sideCount')
+    const sides = document.getElementById('polygonSidesSlider')
+    const rotation = document.getElementById('rotationSlider').value
+    const sideCounter = document.getElementById('polygonSidesCount')
     const web = document.getElementById('webCheckbox').checked
-    if (input.value === input.max) {
+    const rotationCounter = document.getElementById('rotationCount')
+    rotationCounter.innerText = (parseInt(rotation) * 5).toString()
+    if (sides.value === sides.max) {
         sideCounter.innerText = '∞'
     } else {
-        sideCounter.innerText = input.value
+        sideCounter.innerText = sides.value
     }
     cc.fillStyle = "#222222"
     cc.fillRect(0, 0, canvas.width, canvas.height)
-    if (input.value === input.max) {
+    if (sides.value === sides.max) {
         drawCircle(web)
     } else {
-        let polygonData = generatePoints(parseInt(input.value))
+        let polygonData = generatePoints(parseInt(sides.value), parseInt(rotation) * 5)
         let points = polygonData[0]
         let perimeter = polygonData[1]
         let area = polygonData[2]
