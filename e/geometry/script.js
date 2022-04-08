@@ -2,15 +2,23 @@ const canvas = document.querySelector('canvas')
 const cc = canvas.getContext('2d')
 const length = 500
 const strokeStyle = "#FF0000"
-const webStyle = "#0000FF"
+const webColor = "#0000FF"
 
-function drawPolygon(points, perimeter, area) {
+function drawPolygon(points, perimeter, area, noLines) {
     cc.beginPath()
     cc.strokeStyle = strokeStyle
     cc.fillStyle = "#FFFFFF"
     cc.lineWidth = 5
     for (const point of points) {
-        cc.lineTo(point[0], point[1])
+        if (noLines) {
+            cc.beginPath()
+            cc.arc(point[0], point[1], 1, 0, Math.PI * 2)
+            cc.closePath()
+            cc.stroke()
+        } else {
+            cc.lineTo(point[0], point[1])
+        }
+
     }
     cc.closePath()
     cc.stroke()
@@ -27,11 +35,8 @@ function drawPolygon(points, perimeter, area) {
 }
 
 function rotate(cx, cy, x, y, angle) {
-    let radians = (Math.PI / 180) * angle,
-        cos = Math.cos(radians),
-        sin = Math.sin(radians),
-        nx = (cos * (x - cx)) + (sin * (y - cy)) + cx,
-        ny = (cos * (y - cy)) - (sin * (x - cx)) + cy;
+    let radians = (Math.PI / 180) * angle, cos = Math.cos(radians), sin = Math.sin(radians),
+        nx = (cos * (x - cx)) + (sin * (y - cy)) + cx, ny = (cos * (y - cy)) - (sin * (x - cx)) + cy;
     return [nx, ny];
 }
 
@@ -76,7 +81,7 @@ function drawCircle(filled) {
     cc.fillText('A = πr²', 0, 50)
     cc.lineWidth = 5
     cc.strokeStyle = strokeStyle
-    cc.fillStyle = webStyle
+    cc.fillStyle = webColor
     cc.arc(500, 500, radius, 0, Math.PI * 2)
     cc.closePath()
     if (filled) {
@@ -85,11 +90,24 @@ function drawCircle(filled) {
     cc.stroke()
 }
 
-function drawWeb(points) {
-    let completed = []
+
+function drawCenterLines(points) {
     cc.beginPath()
     cc.lineWidth = 5
-    cc.strokeStyle = webStyle
+    cc.strokeStyle = webColor
+    for (let e = 0; e < points.length; e++) {
+        cc.moveTo(points[e][0], points[e][1])
+        cc.lineTo(500, 500)
+    }
+    cc.stroke()
+    cc.closePath()
+}
+
+function drawWeb(points) {
+    let completed = []
+    cc.lineWidth = 5
+    cc.strokeStyle = webColor
+    let lines = []
     for (let e = 0; e < points.length; e++) {
         let point = points[e]
         for (let i = 0; i < points.length; i++) {
@@ -109,26 +127,41 @@ function drawWeb(points) {
                 continue
             }
 
-
-            cc.moveTo(point[0], point[1])
-            cc.lineTo(points[i][0], points[i][1])
+            lines.push({start: point, end: points[i]})
         }
         completed.push(point)
     }
+    cc.beginPath()
+    for (let i = 0; i < lines.length; i++) {
+        cc.moveTo(lines[i]['start'][0], lines[i]['start'][1])
+        cc.lineTo(lines[i]['end'][0], lines[i]['end'][1])
+    }
     cc.stroke()
+    cc.closePath()
 }
 
+let spinRotation = 0
 
 function animate() {
     requestAnimationFrame(animate)
     canvas.width = 1000
     canvas.height = 1000
     const sides = document.getElementById('polygonSidesSlider')
-    const rotation = document.getElementById('rotationSlider').value
+    const rotationValue = parseInt(document.getElementById('rotationSlider').value)
     const sideCounter = document.getElementById('polygonSidesCount')
     const web = document.getElementById('webCheckbox').checked
+    const spin = document.getElementById('spinCheckbox').checked
+    const noLines = document.getElementById('pointsCheckbox').checked
+    const centerLines = document.getElementById('centerLineCheckbox').checked
     const rotationCounter = document.getElementById('rotationCount')
-    rotationCounter.innerText = (parseInt(rotation) * 5).toString()
+    let rotation
+    if (spin) {
+        spinRotation += rotationValue / 20
+        rotation = spinRotation
+    } else {
+        rotation = rotationValue
+    }
+    rotationCounter.innerText = (rotationValue * 5).toString()
     if (sides.value === sides.max) {
         sideCounter.innerText = '∞'
     } else {
@@ -139,14 +172,17 @@ function animate() {
     if (sides.value === sides.max) {
         drawCircle(web)
     } else {
-        let polygonData = generatePoints(parseInt(sides.value), parseInt(rotation) * 5)
+        let polygonData = generatePoints(parseInt(sides.value), rotation * 5, noLines)
         let points = polygonData[0]
         let perimeter = polygonData[1]
         let area = polygonData[2]
         if (web) {
             drawWeb(points)
         }
-        drawPolygon(points, perimeter, area)
+        if (centerLines) {
+            drawCenterLines(points)
+        }
+        drawPolygon(points, perimeter, area, noLines)
     }
     cc.beginPath()
     cc.strokeStyle = "#00FF00"

@@ -90,10 +90,13 @@ canvas {
 }
 
 #checkBoxContainer {
-    position: relative;
+    position: absolute;
+    flex-flow: column wrap;
+    gap: 10%;
+    display: flex;
     order: 2;
     left: 22%;
-    top: -45%;
+    top: -6%;
 }
 
 #rotationSliderContainer {
