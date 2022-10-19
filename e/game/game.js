@@ -8,7 +8,6 @@ const roasts = ["I told you.", "my grandmother could've clicked me by now", "cou
     "what? did you expect me to stay put?"]
 const girusText = document.body.querySelector('.girus-text')
 let lastTime = 0
-
 function buttonMove(left, top) {
     button.style.setProperty("--new-left", left.toString() + '%')
     button.style.setProperty("--new-top", top.toString() + '%')

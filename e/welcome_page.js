@@ -1,5 +1,6 @@
 'use strict'
-let christmasMode = false;
+let christmas = false;
+let halloween = false
 let infoSuffix = ' Have fun, and goodbye!'
 const date = new Date()
 const linkButtons = document.querySelectorAll('.link_btn')
@@ -10,11 +11,14 @@ linkButtons.forEach((button) => {
 })
 if (date.getMonth() === 11) {
     if (date.getDate() < 25) {
-        christmasMode = true;
+        christmas = true;
     }
 }
+if (date.getMonth() === 9) {
+    halloween = true
+}
 
-if (christmasMode) {
+if (christmas) {
     for (const snowflake of document.querySelectorAll('.snowflakes')[0].children) {
         snowflake.visibility = 'visible'
     }

@@ -1,11 +1,5 @@
 body {
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
-    background-color: #111111;
-    color: #ffffff;
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji;
+    display: inline;
 }
 
 canvas {
@@ -21,7 +15,6 @@ canvas {
 .slideContainer {
     order: 0;
     position: absolute;
-    display: flex;
     justify-content: center;
     width: 20%;
     left: 1%;
@@ -36,58 +29,7 @@ canvas {
 /*    height: 100%;*/
 /*}*/
 
-.slider {
-    left: 1%;
-    -webkit-appearance: none;
-    margin: 0;
-    appearance: none;
-    height: 10%;
-    width: 100%;
-    border-radius: 5px;
-    min-height: 10px;
-    outline: none;
-    top: 2%;
-    color: #ffffff;
-    background-color: #222222;
-    border-color: #222222;
-}
 
-.slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    background: #424242;
-    cursor: pointer;
-}
-
-.slider::-moz-range-thumb {
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    background: #424242;
-    cursor: pointer;
-}
-
-.slideValue {
-    position: relative;
-    text-align: center;
-    top: 10%;
-    min-width: 50px;
-    right: 50%;
-}
-
-#optionsContainer {
-    top: 2%;
-    position: relative;
-    left: 0.25%;
-    height: 10%;
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-    flex-flow: row nowrap;
-}
 
 #checkBoxContainer {
     position: absolute;
@@ -102,4 +44,12 @@ canvas {
 
 #rotationSliderContainer {
     top: 50%
+}
+#rotationCount {
+    position: relative;
+    top: -250%;
+}
+#polygonSidesCount {
+    position: relative;
+    top: -250%;
 }

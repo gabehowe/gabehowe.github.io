@@ -3,25 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <title>Polygon tester</title>
-    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="../master.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <button class="btn link_btn" link="../index.html" style="position: absolute; left: 0.25%;bottom:0.5%">Back</button>
 <canvas></canvas>
-<div id="optionsContainer">
+<div class="optionsContainer">
     <div class="slideContainer" id="sideCountContainer">
 
         <input class="slider" type="range" min="3" max="21" id="polygonSidesSlider">
 
         <label id="sidesSliderContainer" for="polygonSidesSlider"></label>
-        <p id="polygonSidesCount" class="slideValue">1</p>
     </div>
     <div class="slideContainer" id="rotationSliderContainer">
-        <input id="rotationSlider" class="slider" type="range" min="0" max="36">
+        <label for="rotationSlider" id="rotationSliderLabel">
+            <input id="rotationSlider" class="slider" type="range" min="0" max="36">
+        </label>
 
-        <label for="rotationSlider"></label>
-        <p id="rotationCount" class="slideValue">4</p>
+
     </div>
     <div id="checkBoxContainer">
         <label for="webCheckbox">

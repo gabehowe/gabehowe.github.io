@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>chroma</title>
+    <link href="../master.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+</head>
+<body>
+
+<canvas id="canvas"></canvas>
+
+<button class="btn link_btn" link="../index.html" style="position: absolute; left: 0.25%;bottom:0.5%">Back</button>
+<div class="optionsContainer unselectable">
+    <div style="height:100%;width:50%;gap:15%;display:flex;flex-direction:column;align-items:center;justify-content: center">
+        <div class="sliderContainer">
+            <label for="sizeSlider" id="sizeSliderLabel" class="sliderLabel">10
+            </label>
+            <input type="range" min="1" max="75" value="10" class="slider" id="sizeSlider">
+        </div>
+
+        <div class="sliderContainer">
+            <label for="multiplierSlider" id="multiplierSliderLabel" class="sliderLabel">10
+            </label>
+            <input type="range" min="1" max="10" value="10" class="slider" id="multiplierSlider">
+        </div>
+    </div>
+    <fieldset class="radioButtonContainer">
+        <legend>Display</legend>
+
+        <div>
+            <label for="none">None</label><input type="radio" id="none" name="display" value="none">
+        </div>
+
+        <div>
+            <label for="hue">Hue</label><input type="radio" id="hue" name="display" value="h">
+        </div>
+        <div>
+            <label for="lightness">Lightness</label><input type="radio" id="lightness" name="display" value="l">
+        </div>
+
+        <div>
+            <label for="saturation">Saturation</label><input type="radio" id="saturation" name="display" value="s">
+        </div>
+
+    </fieldset>
+</div>
+
+</body>
+
+<script src="script.js"></script>
+</html>

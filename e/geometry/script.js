@@ -176,13 +176,30 @@ let lastSpiral = false
 let lastSideCount = 0
 let lastRotation = 0
 
+function init() {
+    const sidesSlider = document.getElementById('polygonSidesSlider')
+    const rotationSlider = document.getElementById('rotationSlider')
+
+    // rotationValue.style.left = `${(92.7 / (rotationSlider.max - rotationSlider.min)) * (rotationSlider.value - rotationSlider.min) - 46.4}%`
+    // rotationSlider.oninput = () => {
+    //     rotationValue.style.left = `${(92.7 / (rotationSlider.max - rotationSlider.min)) * (rotationSlider.value - rotationSlider.min) - 46.4}%`
+    // }
+    //
+    // sideValue.style.left = `${(92.7 / (sidesSlider.max - sidesSlider.min)) * (sidesSlider.value - sidesSlider.min) - 46.5}%`
+    // sidesSlider.oninput = () => {
+    //     sideValue.style.left = `${(92.7 / (sidesSlider.max - sidesSlider.min)) * (sidesSlider.value - sidesSlider.min) - 46.5}%`
+    // }
+
+    // let psdelt = window.getComputedStyle(document.querySelector('#polygonSidesSlider'), '::-moz-range-thumb')
+    // console.log(psdelt)
+}
+
 function animate() {
     requestAnimationFrame(animate)
     canvas.width = 1000
     canvas.height = 1000
     const sides = document.getElementById('polygonSidesSlider')
     const rotationValue = parseInt(document.getElementById('rotationSlider').value)
-    const sideCounter = document.getElementById('polygonSidesCount')
     const web = document.getElementById('webCheckbox').checked
     const spin = document.getElementById('spinCheckbox').checked
     const noLines = document.getElementById('pointsCheckbox').checked
@@ -208,20 +225,15 @@ function animate() {
         length = 470
         spiralPoints = []
     }
-    const rotationCounter = document.getElementById('rotationCount')
+    // const rotationCounter = document.getElementById('rotationCount')
     let rotation
     if (spin) {
-        spinRotation += rotationValue / 20
+        spinRotation += rotationValue / 2
         rotation = spinRotation
     } else {
         rotation = rotationValue
     }
-    rotationCounter.innerText = (rotationValue * 5).toString()
-    if (sides.value === sides.max) {
-        sideCounter.innerText = '∞'
-    } else {
-        sideCounter.innerText = sides.value
-    }
+    // rotationCounter.innerText = (rotationValue * 5).toString()
     cc.fillStyle = "#222222"
     cc.fillRect(0, 0, canvas.width, canvas.height)
     if (sides.value === sides.max) {
@@ -247,5 +259,5 @@ function animate() {
     cc.closePath()
 }
 
-
+init()
 animate()
