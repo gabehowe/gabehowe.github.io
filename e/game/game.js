@@ -1,6 +1,6 @@
 'use strict'
 let trial = 1
-const button = document.body.querySelector('.btn');
+const button = document.getElementById('main-button')
 const trick2 = document.body.querySelector('.trick2')
 const roasts = ["I told you.", "my grandmother could've clicked me by now", "could you be any worse?",
     "honestly, I knew you were bad, but I didn't think you could be this bad!",
@@ -146,7 +146,7 @@ trick2.addEventListener('click', () => {
         }, 2000)
     }
 })
-button.addEventListener('click', function () {
+button.addEventListener('mousedown', function () {
     if (trial === 1) {
         document.title = "Second Trial"
         trial = 2
@@ -181,15 +181,15 @@ button.addEventListener('mouseenter', async function () {
                 if (trial === 1) {
                     buttonSay(roasts[getRandomArbitrary(0, roasts.length)])
                 }
-            }, 40)
+            }, 40) // should be 40
         }
-    }, 100);
+    }, 0);
 
 })
 girusText.addEventListener('animationend', () => {
     girusText.querySelector('.nest').innerHTML = ""
 })
-const linkButtons = document.querySelectorAll('.link_btn')
+const linkButtons = document.querySelectorAll('.link-btn')
 linkButtons.forEach((button) => {
     button.addEventListener('click', () => {
         window.location.href = button.getAttribute('link')

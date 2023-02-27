@@ -1,5 +1,5 @@
 // handle back button
-const linkButtons = document.querySelectorAll('.link_btn')
+const linkButtons = document.querySelectorAll('.link-btn')
 linkButtons.forEach((button) => {
     button.addEventListener('click', () => {
         window.location.href = button.getAttribute('link')
