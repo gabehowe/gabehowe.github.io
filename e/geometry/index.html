@@ -7,41 +7,45 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<a class="btn link-btn" href="../index.html" style="position: absolute; left: 0.25%;bottom:0.5%">Back</a>
-<canvas></canvas>
-<div class="optionsContainer">
-    <div class="slideContainer" id="sideCountContainer">
+<div class="options-container">
+    <div class ="slides-container">
+        <div class="slide-container" id="side-count-container">
 
-        <input class="slider" type="range" min="3" max="21" id="polygonSidesSlider">
+            <input class="slider" type="range" min="3" max="21" id="polygon-sides-slider">
 
-        <label id="sidesSliderContainer" for="polygonSidesSlider"></label>
+            <label id="sides-slider-container" for="polygon-sides-slider"></label>
+        </div>
+        <div class="slide-container" id="rotation-slider-container">
+            <label for="rotation-slider" id="rotation-slider-label">
+                <input id="rotation-slider" class="slider" type="range" min="0" max="36">
+            </label>
+
+
+        </div>
     </div>
-    <div class="slideContainer" id="rotationSliderContainer">
-        <label for="rotationSlider" id="rotationSliderLabel">
-            <input id="rotationSlider" class="slider" type="range" min="0" max="36">
-        </label>
-
-
-    </div>
-    <div id="checkBoxContainer">
-        <label for="webCheckbox">
-            <input id="webCheckbox" type="checkbox">
+    <div id="checkbox-container">
+        <label for="web-checkbox">
+            <input id="web-checkbox" type="checkbox">
             Web</label>
-        <label for="spinCheckbox">
-            <input id="spinCheckbox" type="checkbox">
+        <label for="spin-checkbox">
+            <input id="spin-checkbox" type="checkbox">
             Spin</label>
-        <label for="pointsCheckbox">
-            <input id="pointsCheckbox" type="checkbox">
+        <label for="points-checkbox">
+            <input id="points-checkbox" type="checkbox">
             Points</label>
-        <label for="centerLineCheckbox">
-            <input id="centerLineCheckbox" type="checkbox">
+        <label for="center-line-checkbox">
+            <input id="center-line-checkbox" type="checkbox">
             Center Lines</label>
 
-        <label for="spiralCheckbox">
-            <input id="spiralCheckbox" type="checkbox">
+        <label for="spiral-checkbox">
+            <input id="spiral-checkbox" type="checkbox">
             Spiral</label>
     </div>
 </div>
+
+<canvas></canvas>
+
+<a class="btn link-btn" href="../index.html" style="position: absolute; left: 0.25%;bottom:0.5%">Back<img class="mobile-image" width="30" src="../pictures/back.svg" alt="Back"></a>
 </body>
 <script src="script.js"></script>
 </html>

@@ -19,7 +19,7 @@ canvas {
     top: 1%
 }
 
-.optionsContainer {
+.options-container {
     position: absolute;
     display: flex;
     flex-direction: row;

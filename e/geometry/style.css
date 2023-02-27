@@ -1,25 +1,32 @@
 body {
-    display: inline;
+    align-items: center;
+    justify-content: start;
+    display: flex;
+    flex-direction: column;
 }
 
 canvas {
-    position: absolute;
-    height: 75%;
+    position: relative;
     left: 1.5%;
     top: 15%;
-    max-width: 800px;
-    max-height: 800px;
+    max-width: 90%;
+    max-height: 65%;
+    aspect-ratio: 1;
     outline: #010101 5px inset;
 }
 
-.slideContainer {
+.slide-container {
     order: 0;
-    position: absolute;
+    position: relative;
     justify-content: center;
+}
+.slides-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
     width: 20%;
     left: 1%;
-    top: 1%;
-    height: 10%;
+    height: 100%;
 }
 
 /*#sidesSliderContainer {*/
@@ -31,18 +38,17 @@ canvas {
 
 
 
-#checkBoxContainer {
-    position: absolute;
+#checkbox-container {
+    position: relative;
     flex-flow: column wrap;
     gap: 10%;
     display: flex;
-    max-height: 70px;
+    max-height: 70%;
     order: 2;
-    left: 22%;
     top: -6%;
 }
 
-#rotationSliderContainer {
+#rotation-slider-container {
     top: 50%
 }
 #rotationCount {
@@ -52,4 +58,22 @@ canvas {
 #polygonSidesCount {
     position: relative;
     top: -250%;
+}
+@media (max-width: 600px){
+    .options-container {
+        flex-direction: column;
+        align-items: center;
+        height: fit-content;
+    }
+    #checkbox-container {
+        top: 10%;
+        width: 90%;
+        justify-content: center;
+    }
+    .slides-container {
+        width: 90%;
+    }
+    canvas {
+        top: 7.5%;
+    }
 }

@@ -20,7 +20,7 @@ function drawPolygon(points, perimeter, area, noLines, spiralCheckbox) {
         for (const point of points) {
             if (noLines) {
                 cc.beginPath()
-                cc.arc(point[0], point[1], 1, 0, Math.PI * 2)
+                cc.arc(point[0], (point[1]/1000) * canvas.height, 1, 0, Math.PI * 2)
                 cc.closePath()
                 cc.stroke()
             } else {
@@ -59,7 +59,7 @@ function generatePoints(sides, rotation) {
         points.push([(canvas.width / 2) + sideLength * Math.cos(i * 2 * Math.PI / sides), (canvas.height / 2) + sideLength * Math.sin(i * 2 * Math.PI / sides)])
     }
     for (let i = 0; i < points.length; i++) {
-        points[i] = rotate(500, 500, points[i][0], points[i][1], rotation)
+        points[i] = rotate(500, canvas.height/2, points[i][0], points[i][1], rotation)
     }
     let area
     const perimeter = sideLength * sides
@@ -198,13 +198,13 @@ function animate() {
     requestAnimationFrame(animate)
     canvas.width = 1000
     canvas.height = 1000
-    const sides = document.getElementById('polygonSidesSlider')
-    const rotationValue = parseInt(document.getElementById('rotationSlider').value)
-    const web = document.getElementById('webCheckbox').checked
-    const spin = document.getElementById('spinCheckbox').checked
-    const noLines = document.getElementById('pointsCheckbox').checked
-    const centerLines = document.getElementById('centerLineCheckbox').checked
-    const spiralCheckbox = document.getElementById('spiralCheckbox').checked
+    const sides = document.getElementById('polygon-sides-slider')
+    const rotationValue = parseInt(document.getElementById('rotation-slider').value)
+    const web = document.getElementById('web-checkbox').checked
+    const spin = document.getElementById('spin-checkbox').checked
+    const noLines = document.getElementById('points-checkbox').checked
+    const centerLines = document.getElementById('center-line-checkbox').checked
+    const spiralCheckbox = document.getElementById('spiral-checkbox').checked
     if (lastSpiral !== spiralCheckbox) {
         spinRotation = 0
         lastSpiral = spiralCheckbox
@@ -254,7 +254,7 @@ function animate() {
     }
     cc.beginPath()
     cc.strokeStyle = "#00FF00"
-    cc.arc(500, 500, 1, 0, Math.PI * 2)
+    cc.arc(500, canvas.height/2, 1, 0, Math.PI * 2)
     cc.stroke()
     cc.closePath()
 }
