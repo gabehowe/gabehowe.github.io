@@ -7,34 +7,7 @@
     --random-deg-div-2: 5.5;
     --green: #00FF00;
     --white: #ffffff;
-}
-
-@keyframes girus-text-animation {
-    0% {
-        margin-top: 0
-    }
-    33% {
-        transform: rotate(var(--random-deg));
-        margin-top: -5%
-    }
-    90% {
-        transform: rotate(var(--random-deg-div-2));
-        margin-top: -5%;
-        font-size: initial;
-    }
-    100% {
-        margin-top: -5%;
-        font-size: 0;
-    }
-
-
-}
-
-@keyframes button-move {
-    to {
-        top: var(--new-top);
-        left: var(--new-left);
-    }
+    --button-size: 75px;
 }
 
 @keyframes button-rage {
@@ -47,16 +20,6 @@
     to {
         transform: translate(0, 0);
     }
-}
-
-@keyframes button-fade {
-    from {
-        opacity: 100%;
-    }
-    to {
-        opacity: 0;
-    }
-
 }
 
 @keyframes button-collapse {
@@ -76,39 +39,28 @@
 }
 
 .nest {
-    position: relative;
-    top: 50%;
-    left: -50%;
-}
-
-
-.girus-text {
     position: absolute;
-    margin: 0 0 0 25pt;
-    animation: girus-text-animation 1s alternate;
+    text-align: center;
+    width: max-content;
+    top: 0;
+    transition: 0.3s;
+    z-index: -1;
 }
 
-.animation {
-    animation: button-move var(--move-anim-len) s running;
-}
-
-.rage-spin {
-    animation: button-rage 3s;
-}
-
-#main-button {
+.main-button {
     position: absolute;
     left: 50%;
     top: 50%;
-    height: 75px;
-    width: 75px;
+    height: var(--button-size);
+    width: var(--button-size);
     color: var(--white);
-    background-color: var(--primary_color);
+    background-color: var(--primary-color);
     user-select: none;
     user-focus: none;
     cursor: pointer;
 }
-#main-button:active {
+
+.btn.main-button:active {
     background-color: #FF000044;
 }
 
@@ -116,8 +68,10 @@
 .trick2 {
     user-select: none;
     visibility: hidden;
+    opacity: 0;
     position: absolute;
     color: #181818;
+    transition: 1.0s;
 }
 
 .title {
@@ -140,20 +94,9 @@
     height: 425px;
 }
 
-@keyframes duplication {
-    from {
-        opacity: 100%;
-    }
-    to {
-        left: 0;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        transform: translate(0, 0)
-    }
-
-}
-
-.duplication {
-    animation: duplication 1.5s;
+canvas {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
 }

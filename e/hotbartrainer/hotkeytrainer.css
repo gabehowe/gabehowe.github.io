@@ -92,7 +92,7 @@
 
 
 .btn {
-    background: var(--primary_color);
+    background: var(--primary-color);
     border-color: #30363D;
     border-style: solid;
     border-width: 2px;
@@ -110,7 +110,7 @@
 
 .btn:active {
     border-color: #6E7681;
-    background-color: var(--primary_color);
+    background-color: var(--primary-color);
 }
 
 .trainer-img {
