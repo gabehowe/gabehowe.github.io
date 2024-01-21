@@ -220,6 +220,7 @@ input[type="radio"]:checked::before {
         flex-wrap: wrap;
         max-height: 30%;
     }
+
     #back {
         display: none;
     }
@@ -277,6 +278,7 @@ a.footnote {
     color: var(--light-1);
     cursor: pointer;
     text-decoration: none;
+    scroll-margin-top: 10vh;
 }
 
 li.check-list {
@@ -340,7 +342,7 @@ mark {
 pre:has(> code) {
     background-color: var(--dark-1);
     border-radius: 5px;
-    padding: 5px !important;
+    padding: 5px 8px !important;
     color: var(--white);
     width: fit-content;
 }

@@ -5,7 +5,6 @@ from typing import List
 
 import mistletoe.contrib.mathjax
 from jinja2 import Template
-from mistletoe import markdown as html
 
 months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November',
           'December']
@@ -86,8 +85,9 @@ def render_markdown(files: List[str], articles):
                 os.remove(f'e/blog/articles/{html_filename}')
             with open(f'e/blog/articles/{html_filename}', 'w') as html_file:
                 article = Template(open('jinja/article.html').read())
-
-                rendered = article.render(body=html(text, mistletoe.contrib.mathjax.MathJaxRenderer),
+                with mistletoe.contrib.mathjax.MathJaxRenderer(max_line_length=20) as renderer:
+                    body = renderer.render(mistletoe.Document(text))
+                rendered = article.render(body=body,
                                           title=articles[files.index(i)].title, date=articles[files.index(i)].date)
 
                 rendered = find_definition_list(rendered)
@@ -96,7 +96,7 @@ def render_markdown(files: List[str], articles):
                 rendered = re.sub(r"\[\^(.+)]:\s*(.+)",
                                   r"<div class='footnote'><sup><a id='note-\1' href='#note-\1-ref' class='footnote'>\1</a></sup>\2</div>",
                                   rendered)
-                rendered = re.sub(r"\*\[(.+)]:\s*(.+)<", r"<abbr title='\2'>\1</abbr><", rendered)
+                rendered = re.sub(r"\*\[(.+)]:\s*(.+)((?<!\\)[<>]*)", r"<abbr title='\2'>\1</abbr>\3", rendered)
                 rendered = rendered.replace('<pre', '<pre class="prettyprint"')
                 rendered = rendered.replace('<li>[x]',
                                             '<li class="check-list checked">')

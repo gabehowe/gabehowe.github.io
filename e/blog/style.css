@@ -39,6 +39,10 @@
 .card:hover {
     background: #222222;
 }
+p {
+    word-wrap: break-word;
+    max-width: 1000px;
+}
 
 @media (max-width: 600px) {
     .card-container {
