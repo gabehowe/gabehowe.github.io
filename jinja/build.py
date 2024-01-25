@@ -85,6 +85,7 @@ def render_markdown(files: List[str], articles):
                 os.remove(f'e/blog/articles/{html_filename}')
             with open(f'e/blog/articles/{html_filename}', 'w') as html_file:
                 article = Template(open('jinja/article.html').read())
+                text = re.sub(r"\[#(.+)]\((.+)\)", r"<sup><a class='footnote' href='\2'>[\1]</a></sup>", text)
                 with mistletoe.contrib.mathjax.MathJaxRenderer(max_line_length=20) as renderer:
                     body = renderer.render(mistletoe.Document(text))
                 rendered = article.render(body=body,

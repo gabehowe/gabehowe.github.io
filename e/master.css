@@ -272,6 +272,7 @@ code {
 
 sup, sub {
     display: inline-block;
+    font-size: 70%;
 }
 
 div.footnote {
@@ -281,6 +282,7 @@ div.footnote {
     padding: 0;
     width: 100%;
 }
+
 a.footnote {
     color: var(--light-1);
     cursor: pointer;
