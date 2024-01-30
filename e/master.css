@@ -18,6 +18,7 @@ body {
     font-family: Inter, sans-serif;
     color: var(--text-color);
     background: var(--background-color);
+
 }
 
 :root {
@@ -276,20 +277,24 @@ sup, sub {
 }
 
 .section-link {
-    right: 10px;
-    visibility: hidden;
+    opacity: 0;
     cursor: pointer;
     text-decoration: none;
-    margin-right: .3ch;
+    position: absolute;
+    translate: -1ch;
 }
 
-h1:has(>a.section-link), h2:has(>a.section-link), h3:has(>a.section-link), h4:has(>a.section-link), h5:has(>a.section-link), h6:has(> a.section-link) {
-    left: -1.3ch;
-    position: relative;
+
+h1:hover .section-link, h2:hover .section-link, h3:hover .section-link, h4:hover .section-link, h5:hover .section-link, h6:hover .section-link {
+    opacity: initial;
 }
 
-h1:hover .section-link, h2:hover .section-link, h3:hover .section-link, h4:hover .section-link, h5:hover .section-link, h6:hover .section-link{
-    visibility: visible;
+h1, h2, h3, h4, h5, h6 {
+    scroll-margin-top: 10vh;
+}
+
+.section-link:hover {
+    opacity: initial;
 }
 
 div.footnote {
@@ -304,7 +309,6 @@ a.footnote {
     color: var(--light-1);
     cursor: pointer;
     text-decoration: none;
-    scroll-margin-top: 10vh;
 }
 
 li.check-list {
