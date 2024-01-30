@@ -103,7 +103,7 @@ def render_markdown(files: List[str], articles):
                                             '<li class="check-list checked">')
                 rendered = rendered.replace('<li>[ ]', '<li class="check-list">')
                 rendered = re.sub(r"==(.+)==", r"<mark>\1</mark>", rendered)
-                # TODO: Heading ids
+                rendered = re.sub(r"<h(\d).*?>(.+?)<\/h\d>", r"<h\1 id='\2'><a class='section-link' href='#\2'>#</a> \2</h\1>", rendered)
                 html_file.write(rendered)
 
 
