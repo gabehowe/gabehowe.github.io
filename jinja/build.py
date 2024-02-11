@@ -92,11 +92,13 @@ def render_markdown(files: List[str], articles):
                                           title=articles[files.index(i)].title, date=articles[files.index(i)].date)
 
                 rendered = find_definition_list(rendered)
-                rendered = re.sub(r"\[\^(.+)]([^:])",
+                rendered = re.sub(r"\[\^(.+)]([^:;])",
                                   r"<sup><a id='note-\1-ref' href='#note-\1' class='footnote'>\1</a></sup>\2", rendered)
-                rendered = re.sub(r"\[\^(.+)]:\s*(.+)",
+                rendered = re.sub(r"\[\^(.+)][:;]\s*(.+)",
                                   r"<div class='footnote'><sup><a id='note-\1' href='#note-\1-ref' class='footnote'>\1</a></sup>\2</div>",
                                   rendered)
+
+
                 rendered = re.sub(r"\*\[(.+)]:\s*(.+)((?<!\\)[<>]*)", r"<abbr title='\2'>\1</abbr>\3", rendered)
                 rendered = rendered.replace('<pre', '<pre class="prettyprint"')
                 rendered = rendered.replace('<li>[x]',
