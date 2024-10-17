@@ -110,7 +110,7 @@ def render_markdown(files: List[str], articles):
 
 
 def build_blog():
-    files = sorted(os.listdir('e/blog/articles/md'), reverse=True)
+    files = list(filter(lambda it: str(it).endswith("md"), sorted(os.listdir('e/blog/articles/md'), reverse=True)))
     blog = Template(open('jinja/blog.html').read())
     articles = get_attributes(files)
     blog = blog.render(articles=articles)
