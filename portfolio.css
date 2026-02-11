@@ -1,0 +1,12 @@
+h1 {
+    font-size: 21pt;
+}
+h2 {
+    font-size: 18pt;
+}
+h1 > .smallcaps {
+    font-size: 15pt;
+}
+h2 > .smallcaps {
+    font-size: 13pt;
+}
