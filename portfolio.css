@@ -21,7 +21,7 @@ body {
 .project img{
     width: 300px;
     margin: 10px;
-    border: 2px solid rgb(126, 14, 201); /* choose a color */
+    border: 2px solid var(--accent-2); /* choose a color */
     border-radius: 6px;
     display: block;
     margin: auto;
